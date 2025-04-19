@@ -32,7 +32,7 @@ app.use(function(req, res, next) {
 app.get("/menu", async(req, res)=>{
     const cate = req.query.category;
     const items = await Menu.find({category: "Starters"}, {_id:0});
-    console.log(items);
+    // console.log(items);
     res.json(items);
 })
 

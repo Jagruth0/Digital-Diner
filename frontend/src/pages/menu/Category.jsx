@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState,useEffect } from "react";
+import Item from "./Item";
 
 function Category(props) {
     const [starters, setStarters] = useState([]);
@@ -25,7 +26,11 @@ function Category(props) {
         <div>
             <h3>{props.name}</h3>
             <ul>
-                {starters.map((s)=><li> {s.item}............................................................. ${s.price}</li>)}
+                {starters.map((s)=>
+                <li>
+                    <Item name={s.item} price={s.price} />
+                </li>
+                )}
             </ul>
         </div>
     )

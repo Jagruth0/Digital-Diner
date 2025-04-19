@@ -1,7 +1,43 @@
 #root{
   margin-left: 2rem;
+  width: 100%;
+  
+}
+
+body {
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 nav {
   
+}
+
+.item {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1%;
+}
+
+.itemname {
+  flex-basis: 30%;
+}
+
+.itemprice {
+  flex-basis: 50%;
+  font-size: small;
+}
+
+.addtocart {
+  flex-basis: 20%;
+  justify-self: end;
+}
+
+.addtocart > button {
+  border-width: 0px;
+  padding: 0.25rem 0.75rem;
+  background-color: rgba(0, 0, 0, 0);
+}
+.addbutton {
+  background-color: rgba(0, 0, 0, 0.503) !important;
 }
