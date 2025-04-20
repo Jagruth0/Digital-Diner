@@ -10,7 +10,9 @@ body {
 }
 
 nav {
-  
+  display: flex;
+  justify-content: space-around;
+  margin: 2rem 0rem;
 }
 
 .item {
@@ -40,4 +42,57 @@ nav {
 }
 .addbutton {
   background-color: rgba(0, 0, 0, 0.503) !important;
+}
+
+.cartitems{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1%;
+}
+
+.cartitem{
+  flex-basis: 80%;
+}
+
+.itemtotal{
+  flex-basis: 20%;
+}
+
+.checkout{
+  display: flex;
+  justify-content: space-around;
+}
+.checkout > div{
+  flex-basis: 40%;
+}
+.checkout > a{
+  flex-basis: 20%;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.281);
+}
+.form {
+  display: flex;
+  justify-content: center;
+}
+
+#name{
+  margin-bottom: 1rem;
+}
+
+#phno{
+  margin-bottom: 1rem;
+}
+
+form{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.order-history {
+  border: 1px black solid;
+  border-radius: 25px;
+  width: 90%;
+  margin-bottom: 1%;
 }

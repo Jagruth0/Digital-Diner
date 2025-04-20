@@ -6,11 +6,12 @@ function Layout() {
     return(
         <div>
             <nav>
-                <ul>
-                    <li>
-                        <Link to="/menu">Menu</Link>
-                    </li>
-                </ul>
+                <div>
+                    <Link to="/menu">Menu</Link>
+                </div>
+                <div>
+                    <Link to="/cart">Cart</Link>
+                </div>
             </nav>
             <Outlet />
         </div>
