@@ -44,15 +44,19 @@ db.connect();
 
 
 app.get("/menu", async(req, res)=>{
-    const cate = req.query.category;
-    const items = await Menu.find({category: cate}, {_id:0});
-    // console.log(items);
-    res.json(items);
+    try {
+        const cate = req.query.category;
+        const items = await Menu.find({category: cate}, {_id:0});
+        // console.log(items);
+        res.status(200).json(items);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "error while getting menu" });
+    }
 });
 
 app.get("/cart", (req, res)=>{
-
-    res.json(cart);
+    res.status(200).json(cart);
 });
 
 app.get("/orders", async(req, res)=>{
@@ -61,10 +65,11 @@ app.get("/orders", async(req, res)=>{
         // console.log(phn);
         const result = await db.query("SELECT cart FROM orders WHERE phoneno = $1", [phn]);
         // console.log(result.rows);
-        res.json(result.rows);
+        res.status(200).json(result.rows);
 
     } catch (err) {
-        console.log(err);
+        console.error(err);
+        res.status(500).json({ message: "error while getting orders" });
     } 
 })
 
@@ -99,6 +104,9 @@ app.post("/cart", (req, res)=>{
 app.post("/checkout", async(req,res)=>{
     // console.log(req.body);
     const user = req.body;
+    if (!user.phno) {
+        return res.status(400).json({message: "user phone number required"});
+    }
 
     try {
         const result = await db.query("SELECT * FROM users WHERE phone = $1", [user.phno]);
@@ -107,9 +115,11 @@ app.post("/checkout", async(req,res)=>{
             await db.query("INSERT INTO users (name, phone) VALUES ($1, $2)", [user.name, user.phno]);
         }
         await db.query(`INSERT INTO orders (phoneno, cart) VALUES ($1, $2)`, [user.phno, JSON.stringify(cart)]);
+
+        res.status(201).json({message: "order received"});
     } catch (err) {
         console.log(err);
-        
+        res.status(500).json({message: "error receiving order"});
     }
 
     res.status(200).json({message: "Received order"});
@@ -119,12 +129,3 @@ app.post("/checkout", async(req,res)=>{
 app.listen(port, ()=>{
     console.log(`Running on port: ${port}`);
 });
-
-
-
-// function Dbarr(inputString) {
-
-//     const newTemp = inputString.replace(/"/g, "'");
-//     return newTemp;
-
-// }
